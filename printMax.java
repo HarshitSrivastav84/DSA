@@ -17,5 +17,6 @@ public class printMax {
             }
         }
         System.out.println("The maximum element in the array is: " + max);
+        sc.close();
     }
 }
