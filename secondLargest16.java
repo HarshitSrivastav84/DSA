@@ -18,8 +18,9 @@ public class secondLargest16 extends inheritArray {
                 largest = arr[i];
             }
             else if(largest > arr[i]){
-                largest = largest;
-                secondLargest = secondLargest;
+                if(secondLargest < arr[i]){
+                    secondLargest = arr[i];
+                }
             }
         }
         System.out.println("Second largest element in the array is: " + secondLargest);
