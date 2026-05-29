@@ -24,5 +24,7 @@ public class secondLargest16 extends inheritArray {
             }
         }
         System.out.println("Second largest element in the array is: " + secondLargest);
+
+        sc.close();
     }
 }

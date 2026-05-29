@@ -24,5 +24,6 @@ public class elementTwice16 extends inheritArray {
                 System.out.println("The element that occurs once is: " + x);
             }
         }
+        sc.close();
     }
 }
