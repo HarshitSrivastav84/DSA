@@ -1,0 +1,7 @@
+# ==========================================
+# Core Java Exclusions
+# ==========================================
+*.class
+*.log
+*.ctxt
+*tempCodeRunnerFile.java
