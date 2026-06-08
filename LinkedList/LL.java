@@ -23,6 +23,17 @@ public class LL {
         }
     }
 
+    // To display the elements of the linked list
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.value + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("END");
+        System.out.println();
+    }
+
     // To insert a new node at the beginning of the linked list
     public void insertFirst(int val) {
         Node newNode = new Node(val);
@@ -35,15 +46,32 @@ public class LL {
         size += 1;
     }
 
-    // To display the elements of the linked list
-    public void display() {
+    // To insert at particular index
+    public void insert(int val, int index) {
+        Node newNode = new Node(val);
         Node temp = head;
-        while (temp != null) {
-            System.out.print(temp.value + " -> ");
+        int onIndex = 0;
+        if (index == 0) {
+            insertFirst(val);
+            return;
+        }
+        if (index < 0 || index > size) {
+            System.out.println("Illegal index");
+            return;
+        }
+        if (index == size) {
+            insertLast(val);
+            return;
+        }
+        while (onIndex < index - 1) {
+            onIndex++;
             temp = temp.next;
         }
-        System.out.println("END");
-        System.out.println();
+        Node nextAddress = temp.next;
+        temp.next = newNode;
+        newNode.next = nextAddress;
+        size++;
+        return;
     }
 
     // To insert a new node at the end of the linked list
@@ -56,9 +84,11 @@ public class LL {
         // temp = temp.next;
         // }
 
-        if(tail == null){
+        if (tail == null) {
             System.out.println("List is empty");
-            System.out.println("Insert some value first");
+            System.out.println("Inserting as the first element");
+            insertFirst(val);
+            return;
         }
 
         tail.next = newNode;
@@ -67,8 +97,63 @@ public class LL {
         size++;
     }
 
+    // To delete the first element
+    public int deleteFirst() {
+        int val = head.value;
+        if(head == null){
+            System.out.println("List is empty, can't delete");
+        }
+        head = head.next;
+        if(head == null){
+            tail = null;
+        }
+        size--;
+        return val;
+    }
+
+    // To delete at particular index
+    public int delete(int index){
+        Node temp = head;
+        if(index<0 || index>=size){
+            System.out.println("Illegal index");
+            return -1;
+        }
+        if(index == 0){
+            return deleteFirst();
+        }
+        if(index == size-1){
+            return deleteLast();
+        }
+        for(int i=1; i<index; i++){
+            temp = temp.next;
+        }
+        int val = temp.next.value;
+        temp.next = temp.next.next;
+        if(temp.next == tail){
+            tail = temp;
+        }
+        size--;
+        return val;
+    }
+
+    // To delete at last index
+    public int deleteLast(){
+        int val = tail.value;
+        Node temp = head;
+        for(int i=1; i<size-1; i++){
+            temp = temp.next;
+        }
+        temp.next = null;
+
+        if(head == null){
+            tail = null;
+        }
+        size--;
+        return val;
+    }
+
     // To print size
-    public void printSize(){
+    public void printSize() {
         System.out.println("The number of elements are: " + size);
     }
 }
