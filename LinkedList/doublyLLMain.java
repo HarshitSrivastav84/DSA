@@ -16,6 +16,8 @@ public class doublyLLMain {
         list1.insert(22, 4);    
         list1.insert(33, 7);
         list1.display();
+        
+        list1.displayReverse();
 
         System.out.println("Deleted element is: " + list1.deleteLast());
         list1.display();

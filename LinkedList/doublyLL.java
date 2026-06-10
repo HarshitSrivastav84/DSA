@@ -50,16 +50,35 @@ public class doublyLL {
         System.out.println();
     }
 
+    // Display in reverse order
+    public void displayReverse() {
+        Node temp = tail;
+        if (tail == null) {
+            System.out.println("List is empty");
+            return;
+        }
+        System.out.println();
+        System.out.print("End -> ");
+        for (int i = size; i > 0; i--) {
+            System.out.print(temp.value + " <-> ");
+            temp = temp.prev;
+        }
+        System.out.print("Start");
+        System.out.println();
+    }
+
     // Insert at start
     public void insertFirst(int val) {
         Node newNode = new Node(val);
-        newNode.value = val;
         newNode.prev = null;
         newNode.next = head;
-        head = newNode;
+        if (head != null) {
+            head.prev = newNode;
+        }
         if (tail == null) {
             tail = head;
         }
+        head = newNode;
         size++;
     }
 
@@ -84,6 +103,7 @@ public class doublyLL {
         }
         newNode.next = temp.next;
         newNode.prev = temp.next.prev;
+        temp.next.prev = newNode;
         temp.next = newNode;
         newNode.prev = temp;
         size++;
@@ -104,9 +124,9 @@ public class doublyLL {
     }
 
     // Deleting from start
-    public int deleteStart(){
+    public int deleteStart() {
         int val = head.value;
-        if(head == null){
+        if (head == null) {
             System.out.println("List is empty");
         }
         head = head.next;
@@ -118,7 +138,7 @@ public class doublyLL {
     // Deleting from last node
     public int deleteLast() {
         int val = tail.value;
-        if(tail == null){
+        if (tail == null) {
             System.out.println("List is empty");
         }
         tail = tail.prev;
