@@ -156,4 +156,75 @@ public class LL {
     public void printSize() {
         System.out.println("The number of elements are: " + size);
     }
+    
+    
+    
+
+
+    
+    
+    // Video -> 02
+
+
+
+
+
+
+
+    // Remove duplicates
+    public void removeDuplicates(){
+        Node temp = head;
+        while(temp.next != null){
+            if(temp.value == temp.next.value){
+                temp.next = temp.next.next;
+                size--;
+            }else{
+                temp = temp.next;
+            }
+        }
+    }
+
+    // Merge two sorted linked list
+    public static LL merge(LL first, LL second){
+        Node head1 = first.head;
+        Node head2 = second.head;
+
+        LL ans = new LL();
+        Node headAns = ans.head;
+        Node temp = ans.head;
+        int count = 0;
+        
+        while(head1 != null && head2 != null){
+            if(head1.value < head2.value){
+                // ans.insertLast(head1.value);
+                // head1 = head1.next;
+                temp = head1;
+                temp = temp.next;
+                head1 = head1.next;
+            }
+            else{
+                if(count == 0){
+                    headAns = head2;
+                    count++;
+                    headAns.next = temp.next;
+                }
+                temp = head2;
+                temp = temp.next;
+                head2 = head2.next;
+            }
+        }
+        while(head1 == null || head2 == null){
+            if(head1 == null && head2 != null){
+                temp = head2;
+                temp = temp.next;
+                head2 = head2.next;
+            }
+            else if(head2 == null && head1 != null){
+                temp = head1;
+                temp = temp.next;
+                head1 = head1.next;
+            }
+        }
+        return ans;
+    }
 }

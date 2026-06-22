@@ -97,7 +97,7 @@ public class circularLL {
         tail = newNode;
         size++;
     }
-    
+
     // To delete from start
     public int deleteFirst(){
         Node temp = head;
