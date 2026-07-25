@@ -102,11 +102,11 @@ public class LL {
     // To delete the first element
     public int deleteFirst() {
         int val = head.value;
-        if(head == null){
+        if (head == null) {
             System.out.println("List is empty, can't delete");
         }
         head = head.next;
-        if(head == null){
+        if (head == null) {
             tail = null;
         }
         size--;
@@ -114,24 +114,24 @@ public class LL {
     }
 
     // To delete at particular index
-    public int delete(int index){
+    public int delete(int index) {
         Node temp = head;
-        if(index<0 || index>=size){
+        if (index < 0 || index >= size) {
             System.out.println("Illegal index");
             return -1;
         }
-        if(index == 0){
+        if (index == 0) {
             return deleteFirst();
         }
-        if(index == size-1){
+        if (index == size - 1) {
             return deleteLast();
         }
-        for(int i=1; i<index; i++){
+        for (int i = 1; i < index; i++) {
             temp = temp.next;
         }
         int val = temp.next.value;
         temp.next = temp.next.next;
-        if(temp.next == tail){
+        if (temp.next == tail) {
             tail = temp;
         }
         size--;
@@ -139,15 +139,15 @@ public class LL {
     }
 
     // To delete at last index
-    public int deleteLast(){
+    public int deleteLast() {
         int val = tail.value;
         Node temp = head;
-        for(int i=1; i<size-1; i++){
+        for (int i = 1; i < size - 1; i++) {
             temp = temp.next;
         }
         temp.next = null;
 
-        if(head == null){
+        if (head == null) {
             tail = null;
         }
         size--;
@@ -158,36 +158,24 @@ public class LL {
     public void printSize() {
         System.out.println("The number of elements are: " + size);
     }
-    
-    
-    
 
-
-    
-    
     // Video -> 02
 
-
-
-
-
-
-
     // Remove duplicates
-    public void removeDuplicates(){
+    public void removeDuplicates() {
         Node temp = head;
-        while(temp.next != null){
-            if(temp.value == temp.next.value){
+        while (temp.next != null) {
+            if (temp.value == temp.next.value) {
                 temp.next = temp.next.next;
                 size--;
-            }else{
+            } else {
                 temp = temp.next;
             }
         }
     }
 
     // Merge two sorted linked list
-    public static LL merge(LL first, LL second){
+    public static LL merge(LL first, LL second) {
         Node head1 = first.head;
         Node head2 = second.head;
 
@@ -195,17 +183,16 @@ public class LL {
         Node headAns = ans.head;
         Node temp = ans.head;
         int count = 0;
-        
-        while(head1 != null && head2 != null){
-            if(head1.value < head2.value){
+
+        while (head1 != null && head2 != null) {
+            if (head1.value < head2.value) {
                 // ans.insertLast(head1.value);
                 // head1 = head1.next;
                 temp = head1;
                 temp = temp.next;
                 head1 = head1.next;
-            }
-            else{
-                if(count == 0){
+            } else {
+                if (count == 0) {
                     headAns = head2;
                     count++;
                     headAns.next = temp.next;
@@ -215,13 +202,12 @@ public class LL {
                 head2 = head2.next;
             }
         }
-        while(head1 == null || head2 == null){
-            if(head1 == null && head2 != null){
+        while (head1 == null || head2 == null) {
+            if (head1 == null && head2 != null) {
                 temp = head2;
                 temp = temp.next;
                 head2 = head2.next;
-            }
-            else if(head2 == null && head1 != null){
+            } else if (head2 == null && head1 != null) {
                 temp = head1;
                 temp = temp.next;
                 head1 = head1.next;
@@ -230,18 +216,121 @@ public class LL {
         return ans;
     }
 
-    // Cycle
+    // Cycle detection
+    // Question->141
     public boolean hasCycle(Node head) {
         Node fast = head;
         Node slow = head;
 
-        while(fast != null && fast.next != null){
+        while (fast != null && fast.next != null) {
             fast = fast.next.next;
             slow = slow.next;
-            if(fast == slow){
+            if (fast == slow) {
                 return true;
             }
         }
         return false;
+    }
+
+    // Find length of the cycle
+    public int findCycleLength(Node head) {
+        Node fast = head;
+        Node slow = head;
+
+        int length = 1;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                while (slow.next != fast) {
+                    slow = slow.next;
+                    length++;
+                }
+                return length;
+            }
+        }
+        return 0;
+    }
+
+    // Find the starting node of the cycle
+    // Question->142
+    public Node detectCycle(Node head) {
+        Node fast = head;
+        Node slow = head;
+
+        int length = 1;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                while (slow.next != fast) {
+                    slow = slow.next;
+                    length++;
+                }
+            }
+        }
+        // Finding the start node
+        Node first = head;
+        Node second = head;
+
+        while (length > 0) {
+            second = second.next;
+            length--;
+        }
+        // Keep moving both pointers until they meet
+        while (first != second) {
+            first = first.next;
+            second = second.next;
+        }
+        return first;
+    }
+
+    // Happy number
+    // Question->202
+    public boolean isHappy(int n) {
+        int slow = n;
+        int fast = n;
+
+        do {
+            slow = findSquareSum(slow);
+            fast = findSquareSum(findSquareSum(fast));
+        } while (fast != slow);
+
+        if(slow == 1){
+            return true;
+        }
+        return false;
+    }
+
+    public int findSquareSum(int num) {
+        int sum = 0;
+        while (num > 0) {
+            int rem = num % 10;
+            sum += rem * rem;
+            num = num / 10;
+        }
+        return sum;
+    }
+
+    // Middle of the linked list
+    // Question->876
+    public Node middleNode(Node head) {
+        Node temp1 = head;
+        Node temp2 = head;
+
+        int length = 1;
+
+        while(temp1.next != null){
+            temp1 = temp1.next;
+            length++;
+        }
+        length = length / 2;
+        while(length > 0){
+            temp2 = temp2.next;
+            length--;
+        }
+        return temp2;
     }
 }
