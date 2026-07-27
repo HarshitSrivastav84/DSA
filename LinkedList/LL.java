@@ -1,4 +1,3 @@
-import java.lang.classfile.components.ClassPrinter.ListNode;
 
 public class LL {
 
@@ -332,5 +331,24 @@ public class LL {
             length--;
         }
         return temp2;
+    }
+
+    public void reverseList(Node head){
+        if(size<2){
+            return;
+        }
+        Node prev = null;
+        Node pres = head;
+        
+        while(pres != null){
+            Node next = pres.next;
+            pres.next = prev;
+            prev = pres;
+            pres = next;
+            if(next != null){
+                next = next.next;
+            }
+        }
+        head = prev;
     }
 }
