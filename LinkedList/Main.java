@@ -10,10 +10,7 @@ public class Main{
         list.insertFirst(1);
 
         list.display();
-
-        list.reverseList(null);
-
-        list.display();
+        // System.out.println(list.palindrome(list.head));
 
         // list1.insert(24, 4);
         // list1.insert(42, 2);

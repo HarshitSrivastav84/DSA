@@ -297,7 +297,7 @@ public class LL {
             fast = findSquareSum(findSquareSum(fast));
         } while (fast != slow);
 
-        if(slow == 1){
+        if (slow == 1) {
             return true;
         }
         return false;
@@ -321,34 +321,88 @@ public class LL {
 
         int length = 1;
 
-        while(temp1.next != null){
+        while (temp1.next != null) {
             temp1 = temp1.next;
             length++;
         }
         length = length / 2;
-        while(length > 0){
+        while (length > 0) {
             temp2 = temp2.next;
             length--;
         }
         return temp2;
     }
 
-    public void reverseList(Node head){
-        if(size<2){
-            return;
+    public Node reverseList(Node head) {
+        if (size < 2) {
+            return head;
         }
         Node prev = null;
         Node pres = head;
-        
-        while(pres != null){
+
+        while (pres != null) {
             Node next = pres.next;
             pres.next = prev;
             prev = pres;
             pres = next;
-            if(next != null){
+            if (next != null) {
                 next = next.next;
             }
         }
-        head = prev;
+        // head = prev;
+        return prev;
+    }
+
+    // Palindrome
+    // Question -> 234
+    public boolean palindrome(Node head){
+        Node temp = head;
+        int length = 0;
+        while(temp != null){
+            temp = temp.next;
+            length++;
+        }
+        Node mid = head;
+        for(int i=0; i<length/2; i++){
+            mid = mid.next;
+        }
+        Node headSecond = reverseList(mid);
+        Node first = head;
+        while(headSecond != null){
+            if(first.value != headSecond.value){
+                return false;
+            }
+            first = first.next;
+            headSecond = headSecond.next;
+        }
+        return true;
+    }
+
+    // Reorder list
+    // Question -> 143
+    public Node reorder(Node head){
+        Node temp = head;
+        int length = 0;
+        while(temp != null){
+            temp = temp.next;
+            length++;
+        }
+        Node mid = head;
+        for(int i=0; i<length/2; i++){
+            mid = mid.next;
+        }
+        Node headSecond = reverseList(mid);
+        Node first = head;
+        Node forPrevHead = head;    // For the next node of first.
+        Node secondNext = mid;      // For the next node from the mid
+        while(headSecond != null){
+            forPrevHead = first.next;
+            first.next = headSecond;
+            first = forPrevHead;
+            secondNext = headSecond.next;
+            headSecond.next = first;
+            headSecond = secondNext;
+        }
+        return head;
     }
 }
