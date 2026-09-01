@@ -12,6 +12,7 @@ public class printSubArray {
                     sum = sum + arr[k];
                     System.out.print(arr[k] + " ");
                 }
+                System.out.println();
                 System.out.println("sum = " + sum);
             }
         }

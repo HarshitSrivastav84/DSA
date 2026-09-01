@@ -14,5 +14,10 @@ public class reverse17 extends inheritArray {
             System.out.print(arr[i] + " ");
         }
         sc.close();
+
+
+        // byte b = (byte) 520;
+        // byte a = 15;
+        // System.out.println(a+b);
     }
 }
