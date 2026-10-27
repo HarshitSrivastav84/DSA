@@ -5,3 +5,11 @@
 *.log
 *.ctxt
 *tempCodeRunnerFile.java
+
+
+# For not showing the .class files in vscode
+# {
+#   "files.exclude": {
+#     "**/*.class": true
+#   }
+# }
