@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
         int n = nums.length;
